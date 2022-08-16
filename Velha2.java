@@ -13,8 +13,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 public class Velha2 extends JFrame {
+ 
 
     JButton[] bt = new JButton[9];
+
+    JLabel px = new JLabel("X= 0");
+    JLabel po = new JLabel("O =0");
+    int PX =0;
+    int PO=0;
     boolean xo = false;
     boolean[] click = new boolean[9];
 
@@ -146,12 +152,62 @@ public class Velha2 extends JFrame {
             xo = true;
 
         }
+        ganhou();
     }
-
+    public void atualiza(){
+        px.setText("X ="+PX);
+        po.setText("O ="+PO);
+    }
+     
+    public void ganhou(){
+          int cont =0;
+        for (int i = 0; i < 9; i++) {
+            if (click[i]==true){
+                cont++;
+            }
+            
+        }
+        if((bt[0].getText()== "X" && bt[1].getText()== "X" && bt[2].getText()=="X")
+                ||(bt[3].getText()== "X" && bt[4].getText()== "X" && bt[5].getText()=="X")
+                ||(bt[6].getText()== "X" && bt[7].getText()== "X" && bt[8].getText()=="X")
+                ||(bt[0].getText()== "X" && bt[3].getText()== "X" && bt[6].getText()=="X")
+                ||(bt[1].getText()== "X" && bt[4].getText()== "X" && bt[7].getText()=="X")
+                ||(bt[2].getText()== "X" && bt[5].getText()== "X" && bt[8].getText()=="X")
+                ||(bt[0].getText()== "X" && bt[4].getText()== "X" && bt[8].getText()=="X")
+                ||(bt[6].getText()== "X" && bt[4].getText()== "X" && bt[2].getText()=="X")){
+         JOptionPane.showMessageDialog(null, "X ganhou");
+         PX++;
+         atualiza();
+         limpar();       
+        
+        }else if((bt[0].getText()== "O" && bt[1].getText()== "O" && bt[2].getText()=="O")
+                ||(bt[3].getText()== "O" && bt[4].getText()== "O" && bt[5].getText()=="O")
+                ||(bt[6].getText()== "O" && bt[7].getText()== "O" && bt[8].getText()=="O")
+                ||(bt[0].getText()== "O" && bt[3].getText()== "O" && bt[6].getText()=="O")
+                ||(bt[1].getText()== "O" && bt[4].getText()== "O" && bt[7].getText()=="O")
+                ||(bt[2].getText()== "O" && bt[5].getText()== "O" && bt[8].getText()=="O")
+                ||(bt[0].getText()== "O" && bt[4].getText()== "O" && bt[8].getText()=="O")
+                ||(bt[6].getText()== "O" && bt[4].getText()== "O" && bt[2].getText()=="O")){
+         JOptionPane.showMessageDialog(null, "O ganhou");
+         PO++;
+         atualiza();
+         limpar();       
+        
+        }else if(cont==9){
+         JOptionPane.showMessageDialog(null, "Deu velha!");
+         limpar();       
+        }
+    }
+    public void limpar(){
+        for (int i = 0; i< 9; i++) {
+          bt[i].setText("");
+          click[i]= false;
+        }
+    }
     public static void main(String[] args) {
         new Velha2();
 
-        System.out.println("Hello Velha");
     }
 
+   
 }
